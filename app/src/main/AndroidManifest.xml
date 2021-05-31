@@ -9,16 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MrsLiButterKnife">
-        <activity android:name="com.example.javassist.JavassistActivity">
+        <activity android:name="com.example.ioc.IocActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.aspectJ.ASPJMainActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.javassist.JavassistActivity">
         </activity>
+        <activity android:name="com.example.aspectJ.ASPJMainActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
