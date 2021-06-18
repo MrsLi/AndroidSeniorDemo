@@ -8,9 +8,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mrslibutterknife.R
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class KotlinMainActivity : AppCompatActivity() {
@@ -26,16 +24,28 @@ class KotlinMainActivity : AppCompatActivity() {
             tvNum.text = it.what.toString()
             true
         }
+//        run.setOnClickListener{
+//            GlobalScope.launch {
+//                dplyNum()
+//                var message = Message()
+//                message.what = num
+//                handler.sendMessage(message)
+//            }
+//        }
+
         run.setOnClickListener{
             GlobalScope.launch {
-                dplyNum()
-                var message = Message()
-                message.what = num
-                handler.sendMessage(message)
+                runMainIONum()
             }
         }
     }
 
+    suspend fun runMainIONum(){
+       withContext(Dispatchers.Main){
+           num++
+           tvNum.text = num.toString()
+       }
+    }
 
     suspend fun dplyNum(){
         delay(10000)
