@@ -6,12 +6,13 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven{
             url uri('repo')
         }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.3"
+        classpath "com.android.tools.build:gradle:4.2.1"
         classpath "com.example.javassistdoubleclick:modify:1.0.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
@@ -24,6 +25,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
         maven{
             url uri('repo')
         }
