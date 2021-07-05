@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ioc.annotations.ContentView;
 import com.example.ioc.annotations.InjectOnClick;
+import com.example.ioc.annotations.InjectOnLongClick;
 import com.example.ioc.annotations.InjectView;
 import com.example.mrslibutterknife.R;
 
@@ -27,5 +28,11 @@ public class IocActivity extends BaseActivity {
     @InjectOnClick(value = {R.id.tv1})
     public void OnClick(){
         Toast.makeText(this, "Proxy起作用了!!!", Toast.LENGTH_SHORT).show();
+    }
+
+    @InjectOnLongClick(value = {R.id.tv1})
+    public boolean onLongCLick(){
+        Toast.makeText(this, "--长按--", Toast.LENGTH_SHORT).show();
+        return true;
     }
 }

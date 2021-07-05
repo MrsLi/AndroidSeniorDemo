@@ -11,17 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MrsLiButterKnife">
         <activity android:name="com.example.compose.ComposeUiActivity">
+
+        </activity>
+        <activity android:name="com.example.hotfix.HotfixActivity">
+
+        </activity>
+        <activity android:name="com.example.kotlin.KotlinMainActivity"></activity>
+        <activity android:name="com.example.ioc.IocActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.hotfix.HotfixActivity">
-
-        </activity>
-        <activity android:name="com.example.kotlin.KotlinMainActivity"></activity>
-        <activity android:name="com.example.ioc.IocActivity" />
         <activity android:name="com.example.javassist.JavassistActivity" />
         <activity android:name="com.example.aspectJ.ASPJMainActivity" />
         <activity android:name=".MainActivity" />

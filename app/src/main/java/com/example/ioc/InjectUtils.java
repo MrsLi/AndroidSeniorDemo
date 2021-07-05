@@ -3,6 +3,7 @@ package com.example.ioc;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.ioc.annotations.ContentView;
 import com.example.ioc.annotations.EventTag;
@@ -23,7 +24,7 @@ public class InjectUtils {
             injectClick(context);
     }
 
-    private static void injectClick(Object context) {
+    private static void injectClick1(Object context) {
         Class<?> aClass = context.getClass();
         Method[] methods = aClass.getDeclaredMethods();
         for (Method method : methods) {
@@ -52,6 +53,39 @@ public class InjectUtils {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                }
+            }
+        }
+    }
+    private static  void injectClick(Object context){
+        Class<?> aClass = context.getClass();
+        for (Method method : aClass.getDeclaredMethods()) {
+            Annotation[] annotations = method.getDeclaredAnnotations();
+            for (Annotation annotation : annotations) {
+                Class<? extends Annotation> annotationType = annotation.annotationType();
+                EventTag eventTag = annotationType.getAnnotation(EventTag.class);
+                if (eventTag != null) {
+                    String listenerSetter = eventTag.listenerSetter();
+                    Class<?> listenerType = eventTag.listenerType();
+                    String callBackMethod = eventTag.callBackMethod();
+
+                    try {
+                        Method valueMethod = annotationType.getMethod("value");
+                        int[] valueId = (int[]) valueMethod.invoke(annotation);
+                        for (int id : valueId) {
+                            Method findViewById = aClass.getMethod("findViewById",int.class);
+                            View view = (View) findViewById.invoke(context, id);
+                            Class<? extends View> viewClass = view.getClass();
+                            Method setListenerMethod = viewClass.getMethod(listenerSetter, listenerType);
+                            Object proxyInstance = Proxy.newProxyInstance(aClass.getClassLoader(), new Class[]{listenerType}, new ListenerInvokeHandler(context, method));
+                            setListenerMethod.invoke(view,proxyInstance);
+                        }
+
+                    } catch (Exception e) {
+                        Log.d("InjectUtils", "injectClick: e:"+e.getMessage().toLowerCase());
+                        e.printStackTrace();
+                    }
+
                 }
             }
         }
