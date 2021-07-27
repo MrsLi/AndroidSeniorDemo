@@ -3,3 +3,5 @@ include ':annotation'
 include ':app'
 rootProject.name = "MrsLi ButterKnife"
 include ':javassistDoubleClick'
+include ':mainapp'
+include ':pluginapp'
